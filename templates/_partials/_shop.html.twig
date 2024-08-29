@@ -1,0 +1,105 @@
+<!--********************************************* START SECTION 5 **************** HOME PAGE / E-SHOP ****
+    controller > ShopController.php / template > shop /route app_shop -->
+<section class="container m-0 p-0 py-5" id="lombriboutic">
+	<div class="m-0 p-0 col-8">
+		<div class="row mx-auto p-0 justify-content-center">
+			<div class="mx-0 px-0 pt-3 z-2 position-fixed">
+				<img src="{{ asset('assets/svg/separator-section5.svg')}}" class="separator5 img-fluid" alt="separation en vague entre les sections" w="" h="">
+			<!-- TODO: -->
+			</div>
+			<div>
+				<div class="title">
+					<h2 class="title-section text-center">
+						WWF Lombriboutic
+					</h2>
+				</div>
+				<div class="subtitle">
+					<h3 class="subtitle-section text-center py-2">
+						Soutenez-nous en achetant nos produits ou équipez-vous pour aider les vers de terre.
+					</h3>
+				</div>
+			</div>
+			<div class="container px-2">
+				<div class="row p-2 justify-content-center">
+					<div class="card text-center px-2 m-2 ">
+						<div class="card-body">
+							<img src="{{ asset('assets/svg/object-s5.svg')}}" class="picto-shop1" alt="..." w="" h="">
+							<!-- TODO: -->
+							<a href="#" class="text-decoration-none text-uppercase" data-bs-toggle="modal" data-bs-target="#shopModal">
+								<h5 class="card-title text-cente align-text-bottom">
+									objets
+								</h5>
+							</a>
+						</div>
+					</div>
+					<div class="card text-center px-2 m-2">
+						<div class="card-body">
+							<img src="{{ asset('assets/svg/clothe-s5.svg')}}" class="picto-shop2" alt="..." w="" h="">
+							<!-- TODO: -->
+							<a href="#" class="text-decoration-none text-uppercase" data-bs-toggle="modal" data-bs-target="#shopModal">
+								<h5 class="card-title text-cente align-text-bottom">
+									vêtements
+								</h5>
+							</a>
+						</div>
+					</div>
+					<div class="card text-center px-2 m-2">
+						<div class="card-body">
+							<img src="{{ asset('assets/svg/online-s5.svg')}}" class="picto-shop3" alt="..." w="" h="">
+							<!-- TODO: -->
+							<a href="#" class="text-decoration-none text-uppercase" data-bs-toggle="modal" data-bs-target="#shopModal">
+								<h5 class="card-title text-cente align-text-bottom">
+									formations
+								</h5>
+							</a>
+						</div>
+					</div>
+					<div class="card text-center px-2 m-2">
+						<div class="card-body">
+							<img src="{{ asset('assets/svg/equipments-s5.svg')}}" class="picto-shop4" alt="...">
+							<!-- TODO: -->
+							<a href="#" class="text-decoration-none text-uppercase" data-bs-toggle="modal" data-bs-target="#shopModal">
+								<h5 class="card-title text-cente align-text-bottom">
+									équipements
+								</h5>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="text-center py-5">
+			<a href="#" class="btn btn-primary btn-custom btn-orange rounded-5 text-uppercase px-5" data-bs-toggle="modal" data-bs-target="#shopModal">
+				<h5 class="fw-bold">
+					Lombriboutic
+				</h5>
+			</a>
+		</div>
+	</div>
+	<div class="row m-0 p-0">
+		<div class=" mx-0 px-0 z-3 position-relative">
+			<img
+			src="{{ asset('assets/svg/separator5.svg')}}" class="separator5 img-fluid" alt="separation en vague entre les sections" w="" h="">
+		<!-- TODO: -->
+		</div>
+	</div>
+</section>
+<!-- Modal pop'up message -->
+<div class="modal fade" id="shopModal" tabindex="-1" aria-labelledby="shopModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="shopModalLabel">Lombriboutic</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p><span class="fw-bold">Boutique en construction. </span><br/> À très bientôt pour votre première visite !</p>
+			</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-modal-custom rounded-5 text-uppercase px-4" data-bs-dismiss="modal">Fermer</button>
+            </div>
+		</div>
+	</div>
+</div>
+<!--******************************************* END SECTION 5 -->
+

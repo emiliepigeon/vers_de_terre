@@ -1,0 +1,79 @@
+{% if about is defined and about is not null %}
+    <section class="container m-0 p-0 py-5" id="who">
+        <div class="m-0 p-0">
+            <div class="row m-0 p-0">
+                <div class="mx-0 px-0 z-2 position-relative">
+                    <img src="{{ asset('assets/svg/separator-section1.svg')}}" class="separator1 img-fluid" 
+                        alt="separation en vague entre les sections" width="" height="">
+                </div>
+                <div class="title">
+                    <h2 class="title-section text-center">
+                        {{ about.title }}
+                    </h2>
+                </div>
+                <div class="subtitle">
+                    <h3 class="subtitle-section text-center">
+                        {{ about.content }}
+                    </h3>
+                </div>
+            </div>
+            <div class="s1 container text-center px-5 py-1">
+                <div class="row row-cols-8">
+                    <div class="col py-2">
+                        <a href="" class="text-decoration-none">
+                            <h4 class="title-article text-center text-uppercase">
+                                {{ about.title1 }}
+                            </h4>
+                        </a>
+                        <p class="p-beige text-justify">
+                            {{ about.content1|slice(0, 150) ~ '...' }}
+                        </p>
+                        <a href="{{ path('app_about') }}" class="btn-suite">
+                            <h6 class="text-center py-2">
+                                En savoir plus...
+                            </h6>
+                        </a>
+                    </div>
+                    <div class="col py-2">
+                        <a href="" class="text-decoration-none">
+                            <h4 class="title-article text-center text-uppercase">
+                                {{ about.title2 }}
+                            </h4>
+                        </a>
+                        <dl class="list-group text-decoration-none">
+                            {% for conseil in about.content2|split("\n") %}
+                                <dt class="conseil text-decoration-none">
+                                    {{ conseil }}
+                                </dt>
+                            {% endfor %}
+                        </dl>
+                    </div>
+                    <div class="col py-2">
+                        <a href="" class="text-decoration-none">
+                            <h5 class="title-article text-center text-uppercase">
+                                {{ about.title3 }}
+                            </h5>
+                        </a>
+                        <p class="p-beige text-justify">
+                            {{ about.content3|slice(0, 150) ~ '...' }}
+                        </p>
+                        <a href="{{ path('app_about') }}" class="btn-suite">
+                            <h6 class="text-center py-2">
+                                En savoir plus...
+                            </h6>
+                        </a>
+                    </div>
+                </div>           
+            </div>
+            <div class="text-center py-5">
+                <a href="{{ path('app_about') }}" class="btn btn-primary btn-custom btn-brown rounded-5 text-uppercase">
+                    <h5 class="fw-bold">
+                        qui&#8211;sommes nous &#63;
+                    </h5>
+                </a>
+            </div>
+        </div>
+    </section>
+{% else %}
+    <p>Aucune information disponible pour le moment.</p>
+{% endif %}

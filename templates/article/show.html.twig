@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ article.title }}</h1>
+    <img src="{{ asset(article.imageFeatured) }}" alt="{{ article.title }}" class="img-fluid">
+    <p>{{ article.texte }}</p>
+    <p><strong>Catégorie :</strong> {{ article.category.title }}</p>
+    <a href="{{ path('app_home') }}" class="btn btn-primary">Retour à l'accueil</a>
+</div>
+{% endblock %}

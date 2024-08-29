@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos de nous - {{ parent() }}{% endblock %}
+
+{% block body %}
+<section class="container m-0 p-0 py-5">
+    <h2 class="title-section text-center">{{ about.title }}</h2>
+    <div class="content">
+        <h3>{{ about.content }}</h3>
+        
+        <h4>{{ about.title1 }}</h4>
+        <p>{{ about.content1 }}</p>
+        
+        <h4>{{ about.title2 }}</h4>
+        <ul>
+            {% for conseil in about.content2|split("\n") %}
+                <li>{{ conseil }}</li>
+            {% endfor %}
+        </ul>
+        
+        <h4>{{ about.title3 }}</h4>
+        <p>{{ about.content3 }}</p>
+    </div>
+    <div class="text-center py-5">
+        <a href="{{ path('app_home') }}" class="btn btn-primary btn-custom btn-brown rounded-5 text-uppercase">
+            <h5 class="fw-bold">Retour à l'accueil</h5>
+        </a>
+    </div>
+</section>
+{% endblock %}
