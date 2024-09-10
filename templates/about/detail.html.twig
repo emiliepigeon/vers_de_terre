@@ -4,22 +4,22 @@
 
 {% block body %}
 <section class="container m-0 p-0 py-5">
-    <h2 class="title-section text-center">{{ about.title }}</h2>
+    <h2 class="title-section text-center">{{ about.title|raw }}</h2>
     <div class="content">
-        <h3>{{ about.content }}</h3>
+        <h3>{{ about.content|raw }}</h3>
         
-        <h4>{{ about.title1 }}</h4>
-        <p>{{ about.content1 }}</p>
+        <h4>{{ about.title1|raw }}</h4>
+        <p>{{ about.content1|raw }}</p>
         
-        <h4>{{ about.title2 }}</h4>
+        <h4>{{ about.title2|raw }}</h4>
         <ul>
             {% for conseil in about.content2|split("\n") %}
-                <li>{{ conseil }}</li>
+                <li>{{ conseil|raw }}</li>
             {% endfor %}
         </ul>
         
-        <h4>{{ about.title3 }}</h4>
-        <p>{{ about.content3 }}</p>
+        <h4>{{ about.title3|raw }}</h4>
+        <p>{{ about.content3|raw }}</p>
     </div>
     <div class="text-center py-5">
         <a href="{{ path('app_home') }}" class="btn btn-primary btn-custom btn-brown rounded-5 text-uppercase">

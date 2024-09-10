@@ -7,12 +7,16 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField; // Importation de BooleanField
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+#[IsGranted('ROLE_ADMIN')]
 class ArticleCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
@@ -23,47 +27,64 @@ class ArticleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')->hideOnForm(), // Ne pas afficher l'ID dans le formulaire
-            TextField::new('title', 'Titre'), // Champ pour le titre
-            SlugField::new('slug') // Champ pour le slug
-                ->setTargetFieldName('title') // Générer le slug à partir du titre
-                ->onlyOnForms(), // Afficher uniquement dans le formulaire
-            TextEditorField::new('texte', 'Contenu'), // Champ pour le contenu
-            ImageField::new('imageFeatured', 'Image Principale') // Champ pour l'image
-                ->setBasePath('assets/images') // Chemin de base pour les images
-                ->setUploadDir('public/assets/images') // Répertoire où les images sont stockées
-                ->setRequired(false), // Si l'image est optionnelle
-            AssociationField::new('category', 'Catégorie'), // Champ pour la catégorie
-            TextField::new('author', 'Auteur'), // Champ pour l'auteur
-            TextField::new('metaDescription', 'Description Meta'), // Champ pour la description meta
-            TextField::new('metaKeywords', 'Mots-clés Meta'), // Champ pour les mots-clés meta
-            BooleanField::new('isPublished', 'Publié'), // Champ pour l'état de publication
+            IdField::new('id')->hideOnForm(),
+            TextField::new('title', 'Titre'),
+            SlugField::new('slug')->setTargetFieldName('title'),
+            TextEditorField::new('texte', 'Contenu'),
+            TextField::new('imageFile')
+                ->setLabel('Image à uploader')
+                ->setFormType(FileType::class)
+                ->onlyOnForms(),
+            ImageField::new('imageName', 'Image')
+                ->setBasePath('uploads/images/articles')
+                ->setUploadDir('public/uploads/images/articles')
+                ->onlyOnIndex(),
+            AssociationField::new('category', 'Catégorie'),
+            TextField::new('author', 'Auteur'),
+            TextField::new('metaDescription', 'Description Meta'),
+            TextField::new('metaKeywords', 'Mots-clés Meta'),
+            BooleanField::new('isPublished', 'Publié'),
+            DateTimeField::new('createdAt', 'Créé le')->hideOnForm(),
+            DateTimeField::new('updatedAt', 'Mis à jour le')->hideOnForm(),
         ];
     }
 
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    public function createEntity(string $entityFqcn)
     {
-        if ($entityInstance instanceof Article) {
-            // Initialiser la date de création et de mise à jour
-            $entityInstance->setCreatedAt(new \DateTime());
-            $entityInstance->setUpdatedAt(new \DateTime());
-            // Assurez-vous que isPublished a une valeur par défaut
-            if ($entityInstance->getIsPublished() === null) {
-                $entityInstance->setIsPublished(true); // Valeur par défaut
-            }
-        }
-
-        parent::persistEntity($entityManager, $entityInstance);
+        $article = new Article();
+        $article->setCreatedAt(new \DateTimeImmutable());
+        $article->setUpdatedAt(new \DateTimeImmutable());
+        $article->setIsPublished(false);
+        $article->setMetaDescription('Description par défaut');
+        $article->setMetaKeywords('Mots-clés par défaut');
+        return $article;
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
-        if ($entityInstance instanceof Article) {
-            // Mettre à jour la date de mise à jour
-            $entityInstance->setUpdatedAt(new \DateTime());
+        if (!$entityInstance instanceof Article) return;
+
+        $entityInstance->setUpdatedAt(new \DateTimeImmutable());
+
+        if ($entityInstance->getImageFile()) {
+            $newFilename = uniqid() . '.' . $entityInstance->getImageFile()->guessExtension();
+            $entityInstance->getImageFile()->move($this->getParameter('images_directory'), $newFilename);
+            $entityInstance->setImageName($newFilename);
         }
 
         parent::updateEntity($entityManager, $entityInstance);
     }
-}
 
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (!$entityInstance instanceof Article) return;
+
+        if ($entityInstance->getImageFile()) {
+            $newFilename = uniqid() . '.' . $entityInstance->getImageFile()->guessExtension();
+            $entityInstance->getImageFile()->move($this->getParameter('images_directory'), $newFilename);
+            $entityInstance->setImageName($newFilename);
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+}

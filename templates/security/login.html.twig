@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}WWF Connexion{% endblock %}
+
+{% block body %}
+<div class="container m-0 p-0" id="loginform">
+    <div class="row m-0 p-0">
+        <div class="col-md-12">
+            <div class="title">
+                <h2 class="title-section text-center pt-3">
+                    Connexion
+                </h2>
+            </div>
+            <div class="subtitle mb-5">
+                <h3 class="subtitle-section text-center">
+                    Connectez-vous à votre compte World Worm Foundation.
+                </h3>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <form method="post" class="col-md-6">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="alert alert-info mb-3">
+                            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                        </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="inputPassword" class="form-label">Mot de passe</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="row mb-5">
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-primary btn-custom btn-orange rounded-5 text-uppercase px-5">Se connecter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

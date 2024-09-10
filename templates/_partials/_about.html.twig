@@ -8,12 +8,12 @@
                 </div>
                 <div class="title">
                     <h2 class="title-section text-center">
-                        {{ about.title }}
+                        {{ about.title|raw }}
                     </h2>
                 </div>
                 <div class="subtitle">
                     <h3 class="subtitle-section text-center">
-                        {{ about.content }}
+                        {{ about.content|raw }}
                     </h3>
                 </div>
             </div>
@@ -22,11 +22,11 @@
                     <div class="col py-2">
                         <a href="" class="text-decoration-none">
                             <h4 class="title-article text-center text-uppercase">
-                                {{ about.title1 }}
+                                {{ about.title1|raw }}
                             </h4>
                         </a>
-                        <p class="p-beige text-justify">
-                            {{ about.content1|slice(0, 150) ~ '...' }}
+                        <p class="p-beige text-justify text-start">
+                            {{ about.content1|slice(0, 150)|raw ~ '...' }}
                         </p>
                         <a href="{{ path('app_about') }}" class="btn-suite">
                             <h6 class="text-center py-2">
@@ -37,13 +37,13 @@
                     <div class="col py-2">
                         <a href="" class="text-decoration-none">
                             <h4 class="title-article text-center text-uppercase">
-                                {{ about.title2 }}
+                                {{ about.title2|raw }}
                             </h4>
                         </a>
                         <dl class="list-group text-decoration-none">
                             {% for conseil in about.content2|split("\n") %}
                                 <dt class="conseil text-decoration-none">
-                                    {{ conseil }}
+                                    {{ conseil|raw }}
                                 </dt>
                             {% endfor %}
                         </dl>
@@ -51,11 +51,11 @@
                     <div class="col py-2">
                         <a href="" class="text-decoration-none">
                             <h5 class="title-article text-center text-uppercase">
-                                {{ about.title3 }}
+                                {{ about.title3|raw }}
                             </h5>
                         </a>
-                        <p class="p-beige text-justify">
-                            {{ about.content3|slice(0, 150) ~ '...' }}
+                        <p class="p-beige text-justify text-end">
+                            {{ about.content3|slice(0, 150)|raw ~ '...' }}
                         </p>
                         <a href="{{ path('app_about') }}" class="btn-suite">
                             <h6 class="text-center py-2">

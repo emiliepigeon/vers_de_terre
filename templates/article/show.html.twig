@@ -1,13 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}{{ article.title|raw }}{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>{{ article.title }}</h1>
-    <img src="{{ asset(article.imageFeatured) }}" alt="{{ article.title }}" class="img-fluid">
-    <p>{{ article.texte }}</p>
-    <p><strong>Catégorie :</strong> {{ article.category.title }}</p>
-    <a href="{{ path('app_home') }}" class="btn btn-primary">Retour à l'accueil</a>
-</div>
+<section class="container m-0 p-0 py-5" id="singlearticle">
+    <div class="m-0 p-0">
+        <div class="row m-0 p-0 my-5">
+            {# <div class="mx-0 px-0 z-2 position-relative">
+                <img src="{{ asset('assets/svg/separator-section2.svg') }}" class="separator2 img-fluid" 
+                    alt="separation en vague entre les sections" width="" height="">
+            </div> #}
+            <div>
+                <div class="title">
+                    <h2 class="title-section text-center pt-3">
+                        {{ article.title|raw }}
+                    </h2>
+                </div>
+                <div class="subtitle">
+                    <h3 class="subtitle-section text-center">
+                        <strong>Catégorie :</strong> {{ article.category.title|raw }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="container px-5">
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-4 text-center">
+                    {% if article.imageName %}
+                        <img src="{{ asset('uploads/images/articles/' ~ article.imageName) }}" class="img-fluid rounded" 
+                            alt="{{ article.title|raw }}" style="max-width: 100%; height: auto;">
+                    {% else %}
+                        <img src="{{ asset('assets/images/default-article-image.jpg') }}" class="img-fluid rounded" 
+                            alt="{{ article.title|raw }}" style="max-width: 100%; height: auto;">
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <p class="text-start" style="font-size: 0.9rem;">{{ article.texte|raw }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center py-2">
+            <a href="{{ path('app_home') }}" class="btn btn-primary btn-custom btn-light rounded-5 text-uppercase">
+                <h5 class="fw-bold">
+                    Retour à l'accueil
+                </h5>
+            </a>
+        </div>
+    </div>
+</section>
 {% endblock %}

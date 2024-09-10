@@ -19,27 +19,21 @@ class HomeController extends AbstractController
         ArticleRepository $articleRepository,
         CategoryRepository $categoryRepository
     ): Response {
-        $about = $aboutRepository->findMostRecent();
-        $words = $wordsRepository->findAllWords(); // Utilisez la méthode personnalisée
+        $about = $aboutRepository->findOneBy([], ['id' => 'DESC']);
+        $words = $wordsRepository->findAll();
 
         $newsCategories = $categoryRepository->findBy(['title' => ['témoignage', 'éco-geste', 'les dangers']]);
         $trainingCategories = $categoryRepository->findBy(['title' => ['fait maison', 'fiche technique', 'e-learning']]);
 
-        $newsArticles = $articleRepository->findByCategories($newsCategories, 3);
-        $trainingArticles = $articleRepository->findByCategories($trainingCategories, 3);
-
-        $trainingImages = [
-            'assets/images/training1.jpg',
-            'assets/images/training2.jpg',
-            'assets/images/training3.jpg',
-        ];
+        // Utiliser la méthode findLatestFromDifferentCategories
+        $newsArticles = $articleRepository->findLatestFromDifferentCategories($newsCategories, 3);
+        $trainingArticles = $articleRepository->findLatestFromDifferentCategories($trainingCategories, 3);
 
         return $this->render('home/index.html.twig', [
             'about' => $about,
             'words' => $words,
             'newsArticles' => $newsArticles,
             'trainingArticles' => $trainingArticles,
-            'trainingImages' => $trainingImages,
         ]);
     }
 }

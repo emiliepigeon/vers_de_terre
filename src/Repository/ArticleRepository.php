@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -31,7 +32,7 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByCategories(array $categories, int $limit = null, int $offset = null): array
+    public function findByCategory(array $categories, int $limit = null, int $offset = null): array
     {
         $qb = $this->createQueryBuilder('a')
             ->andWhere('a.category IN (:categories)')
@@ -49,9 +50,14 @@ class ArticleRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function countByCategories(array $categories): int
+    public function findByCategories(array $categories, int $limit = null): array
     {
-        return $this->createQueryBuilder('a')
+        return $this->findByCategory($categories, $limit);
+    }
+
+    public function countByCategory(array $categories): int
+    {
+        return (int) $this->createQueryBuilder('a')
             ->select('COUNT(a.id)')
             ->andWhere('a.category IN (:categories)')
             ->setParameter('categories', $categories)
@@ -59,7 +65,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function findAllByCategories(array $categories): array
+    public function findAllByCategory(array $categories): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.category IN (:categories)')
@@ -78,12 +84,51 @@ class ArticleRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findBySlug(string $slug): ?Article
+    public function findBySlug(string $slug): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.slug = :slug')
             ->setParameter('slug', $slug)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
+    }
+
+    public function findLatestFromDifferentCategories(array $categories, int $limit = 3): array
+    {
+        $qb = $this->createQueryBuilder('a');
+        
+        $qb->where($qb->expr()->in('a.category', ':categories'))
+            ->setParameter('categories', $categories)
+            ->orderBy('a.createdAt', 'DESC');
+
+        $results = $qb->getQuery()->getResult();
+
+        $categoriesUsed = [];
+        $finalResults = [];
+
+        foreach ($results as $article) {
+            $categoryId = $article->getCategory()->getId();
+            if (!in_array($categoryId, $categoriesUsed) && count($finalResults) < $limit) {
+                $finalResults[] = $article;
+                $categoriesUsed[] = $categoryId;
+            }
+            if (count($finalResults) >= $limit) {
+                break;
+            }
+        }
+
+        // Si on a moins d'articles que la limite, on complète avec d'autres articles
+        if (count($finalResults) < $limit) {
+            foreach ($results as $article) {
+                if (!in_array($article, $finalResults) && count($finalResults) < $limit) {
+                    $finalResults[] = $article;
+                }
+                if (count($finalResults) >= $limit) {
+                    break;
+                }
+            }
+        }
+
+        return $finalResults;
     }
 }

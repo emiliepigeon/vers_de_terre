@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[UniqueEntity(fields: ['slug'], message: 'Un article avec ce slug existe déjà')]
 class Article
 {
     #[ORM\Id]
@@ -16,38 +19,39 @@ class Article
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[ORM\Column(length: 255, unique: true)]
+    private ?string $slug = null;
+
     #[ORM\Column(type: 'text')]
     private ?string $texte = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $slug = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageName = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $imageFeatured = null; // Chemin de l'image
-
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'articles')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?Category $category = null;
-
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $createdAt = null;
-
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private ?\DateTimeInterface $updatedAt = null;
-
-    #[ORM\Column(type: 'boolean')]
-    private bool $isPublished = false; // Valeur par défaut
 
     #[ORM\Column(length: 255)]
     private ?string $author = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $metaDescription = null;
+    #[ORM\Column]
+    private ?bool $isPublished = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private ?string $metaKeywords = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
 
-    // Getters and Setters...
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    private ?File $imageFile = null;
+
+    #[ORM\Column(length: 255)]
+    private string $metaDescription;
+
+    #[ORM\Column(length: 255)]
+    private string $metaKeywords;
+
+    // Getters and Setters
 
     public function getId(): ?int
     {
@@ -65,17 +69,6 @@ class Article
         return $this;
     }
 
-    public function getTexte(): ?string
-    {
-        return $this->texte;
-    }
-
-    public function setTexte(string $texte): self
-    {
-        $this->texte = $texte;
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -87,15 +80,40 @@ class Article
         return $this;
     }
 
-    public function getImageFeatured(): ?string
+    public function getTexte(): ?string
     {
-        return $this->imageFeatured;
+        return $this->texte;
     }
 
-    public function setImageFeatured(string $imageFeatured): self
+    public function setTexte(string $texte): self
     {
-        $this->imageFeatured = $imageFeatured;
+        $this->texte = $texte;
         return $this;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(string $imageName): self
+    {
+        $this->imageName = $imageName;
+        return $this;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
     public function getCategory(): ?Category
@@ -106,39 +124,6 @@ class Article
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(?\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
-
-    public function getIsPublished(): ?bool
-    {
-        return $this->isPublished;
-    }
-
-    public function setIsPublished(bool $isPublished): self
-    {
-        $this->isPublished = $isPublished;
         return $this;
     }
 
@@ -153,23 +138,56 @@ class Article
         return $this;
     }
 
-    public function getMetaDescription(): ?string
+    public function isIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    public function getMetaDescription(): string
     {
         return $this->metaDescription;
     }
 
-    public function setMetaDescription(?string $metaDescription): self
+    public function setMetaDescription(string $metaDescription): self
     {
         $this->metaDescription = $metaDescription;
         return $this;
     }
 
-    public function getMetaKeywords(): ?string
+    public function getMetaKeywords(): string
     {
         return $this->metaKeywords;
     }
 
-    public function setMetaKeywords(?string $metaKeywords): self
+    public function setMetaKeywords(string $metaKeywords): self
     {
         $this->metaKeywords = $metaKeywords;
         return $this;

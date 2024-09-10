@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Words;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class WordsFixture extends Fixture
 {
@@ -21,10 +22,15 @@ class WordsFixture extends Fixture
 
         foreach ($phrases as $phrase) {
             $word = new Words();
-            $word->setContent($phrase); // Assurez-vous que setContent existe dans votre entité Words
+            $word->setContent($phrase);
             $manager->persist($word);
         }
 
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['WordsFixtures'];
     }
 }

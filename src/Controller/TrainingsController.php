@@ -13,8 +13,11 @@ class TrainingsController extends AbstractController
     #[Route('/formations', name: 'app_trainings')]
     public function index(ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
     {
+        // Récupérer les catégories de formations spécifiques
         $trainingCategories = $categoryRepository->findBy(['title' => ['fait maison', 'fiche technique', 'e-learning']]);
-        $articles = $articleRepository->findAllByCategories($trainingCategories);
+        
+        // Récupérer les articles associés à ces catégories
+        $articles = $articleRepository->findBy(['category' => $trainingCategories]);
 
         return $this->render('trainings/index.html.twig', [
             'articles' => $articles,

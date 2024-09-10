@@ -8,21 +8,22 @@
     <div class="page">
         <!--******************************************* HOME BANNER ******************************************-->
         {% include '_partials/_banner.html.twig' %}      
-        <!--******************************************* START SECTION 1 ABOUT *************  PAGE 2 / WHO ARE WE? ****** 
+        <!--******************************************* START SECTION 1 ABOUT *************  PAGE 2 / WHO ARE WE? ***** 
             controller > AboutController.php / template > about /route app_about -->
         {% include '_partials/_about.html.twig' with {'about': about} %}
         <!--******************************************** START SECTION 2 ************ HOME PAGE /  WWF ACTUALITIES 
             controller > ActualitiesController.php/ template > actualities / route > app_actualities -->
-        {% include '_partials/_actualities.html.twig' with {'articles': newsArticles} %}        <!--******************************************** START SECTION 3 ******** ONLY ON HOME PAGE /  NUMBERS -->
+        {% include '_partials/_actualities.html.twig' with {'articles': newsArticles} %}        
+        <!--******************************************** START SECTION 3 ******** ONLY ON HOME PAGE /  NUMBERS -->
         {% include '_partials/_numbers.html.twig' %}
         <!--******************************************** END SECTION 3 -->
         <!--******************************************** START SECTION 4 ************* HOME PAGE /  WWF TRAININGS ****
             controller > TrainingsController.php / template > trainings /route app_trainings -->
-        {% include '_partials/_trainings.html.twig' with {'articles': trainingArticles, 'trainingImages': trainingImages} %}
+        {% include '_partials/_trainings.html.twig' with {'articles': trainingArticles} %}
         {% include '_partials/_shop.html.twig' %}
         <!--******************************************* END SECTION 5 -->    
         <!--******************************************** START SECTION 6 ****** HOME PAGE / PARTENERS & FRIENDS  ****
-            controller > PatenersController.php / template > pateners /route app_pateners --><!-- TODO: taute manque r à parteners -->
+            controller > PatenersController.php / template > pateners /route app_pateners -->
         {% include '_partials/_parteners.html.twig' %}
         <!--******************************************** END SECTION 6 -->
         <!--*********** Newsletter SECTION 7 it's a partial include on base -->

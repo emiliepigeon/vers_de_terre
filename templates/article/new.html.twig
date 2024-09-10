@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.title|raw }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ article.title|raw }}</h1>
+    {% if article.imageName %}
+        <img src="{{ asset('uploads/images/articles/' ~ article.imageName) }}" alt="{{ article.title|raw }}" class="img-fluid">
+    {% else %}
+        <img src="{{ asset('assets/images/default-article-image.jpg') }}" alt="{{ article.title|raw }}" class="img-fluid">
+    {% endif %}
+    <p>{{ article.texte|raw }}</p>
+    <p><strong>Catégorie :</strong> {{ article.category.title|raw }}</p>
+    <a href="{{ path('app_home') }}" class="btn btn-primary">Retour à l'accueil</a>
+</div>
+{% endblock %}

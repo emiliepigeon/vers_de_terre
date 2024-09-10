@@ -13,8 +13,11 @@ class ActualitiesController extends AbstractController
     #[Route('/actualites', name: 'app_actualities')]
     public function index(ArticleRepository $articleRepository, CategoryRepository $categoryRepository): Response
     {
+        // Récupérer les catégories d'actualités spécifiques
         $actualitiesCategories = $categoryRepository->findBy(['title' => ['témoignage', 'éco-geste', 'les dangers']]);
-        $articles = $articleRepository->findAllByCategories($actualitiesCategories);
+        
+        // Récupérer les articles associés à ces catégories
+        $articles = $articleRepository->findBy(['category' => $actualitiesCategories]);
 
         return $this->render('actualities/index.html.twig', [
             'articles' => $articles,

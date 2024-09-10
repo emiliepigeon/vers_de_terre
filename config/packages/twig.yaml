@@ -1,5 +1,11 @@
 twig:
     file_name_pattern: '*.twig'
+    form_themes: ['bootstrap_5_layout.html.twig']
+    globals:
+        # Vous pouvez ajouter des variables globales ici si nécessaire
+    paths:
+        '%kernel.project_dir%/templates': ~
+    exception_controller: null
 
 when@test:
     twig:

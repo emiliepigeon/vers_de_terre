@@ -1,51 +1,47 @@
-{# ------ newsletter -------------------- for front allpages except footer links and form contacts #}
-<!--START SECTION 7************HOME PAGE / WWF NEWSLETTER -->
-{# <section class="container-fluid m-0 p-0 py-5" id="newsletter">
+<section class="container m-0 p-0 py-5" id="newsletter">
     <div class="m-0 p-0">
-        <div class="title">
-            <h2 class="title-section text-center">
-                WWF Newsletter
-            </h2>
-        </div>
-        <div class="subtitle">
-            <h3 class="subtitle-section text-center py-2">
-                Inscrivez vous pour rester informé.
-            </h3>
-        </div>
-        <div class="text-center py-2">
-            <a href="" class="btn btn-primary btn-custom btn-ligthb rounded-5 text-uppercase">
-                <h5 class="fw-bold">
-                    Inscrivez&#8211;vous
-                </h5>
-            </a>
+        <div class="row mx-auto p-0 justify-content-center">
+            <div class="col-12 mx-0 px-0 pt-3 z-2 position-relative">
+                <img src="{{ asset('assets/svg/separator-section2.svg') }}" class="separator2 img-fluid" alt="separation en vague entre les sections" width="" height="">
+            </div>
+            <div class="col-12">
+                <div class="title">
+                    <h2 class="title-section text-center">
+                        WWF Newsletter
+                    </h2>
+                </div>
+                <div class="subtitle">
+                    <h3 class="subtitle-section text-center py-2">
+                        Inscrivez vous pour rester informé.
+                    </h3>
+                </div>
+            </div>
+			<!-- TODO: BOUTON -->
+			<div class="text-center py-5">
+				<a href="#" class="btn btn-primary btn-custom btn-orange rounded-5 text-uppercase px-5" data-bs-toggle="modal" data-bs-target="#newsletterModal">
+					<h5 class="fw-bold">
+						Inscrivez&#8211;vous				
+					</h5>
+				</a>
+			</div>
         </div>
     </div>
-</section> #}
-<!--*******************************  END SECTION 7 -->
-
-	<section class="container m-0 p-0 py-5" id="newsletter"> <div class="m-0 p-0">
-		<div class="row m-0 p-0">
-			<div class="mx-0 px-0 z-2 position-relative">
-				<img src="{{ asset('assets/svg/separator-section2.svg')}}" class="separator2 img-fluid" alt="separation en vague entre les sections" w="" h="">
-			</div>
-			<div class="title">
-				<h2 class="title-section text-center">
-					WWF Newsletter
-				</h2>
-			</div>
-			<div class="subtitle">
-				<h3 class="subtitle-section text-center py-2">
-					Inscrivez vous pour rester informé.
-				</h3>
-			</div>
-		</div>
-		<div class="text-center py-2">
-			<a href="" class="btn btn-primary btn-custom btn-ligthb rounded-5 text-uppercase my-5">
-				<h5 class="fw-bold">
-					Inscrivez&#8211;vous
-				</h5>
-			</a>
-		</div>
-	</div>
 </section>
 
+<!-- TODO: Modal pop'up message -->
+{# <div class="modal fade" id="newsletterModal" tabindex="-1" aria-labelledby="newsletterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newsletterModalLabel">Inscription à la newsletter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><span class="fw-bold">Formulaire d'inscription en construction. </span><br/> À très bientôt pour votre inscription à notre newsletter !</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-modal-custom rounded-5 text-uppercase px-4" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div> #}
