@@ -1,0 +1,925 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Permanent+Marker&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+*{
+   margin: 0;
+   padding: 0;
+}
+
+/*********** GENERAL STYLE CONFIGURATION of the web site *********/
+:root {
+   --white: #ffff; /* white */
+   --black: #000000; /* black */
+   --beige: #F7D8B3; /* beige */
+   --orange: #D63C1A; /* orange */
+   --oldpink: #B68176; /* oldpink */
+   --brownlight: #4B1810; /* brownlight */
+   --darkbrown: #32110C; /* darkbrown */
+   --title:"Pacifico", cursive;
+   --body: "Red Hat Display", sans-serif;
+   --words: "Permanent Marker", cursive;
+   --default-nav-color: #32110C; /* Couleur par défaut pour les liens de la navbar */
+}
+html {
+   background-color: var(--oldpink);
+}
+body {
+   width: 100%;
+   max-width: 1440px;
+   margin: 0 auto;
+   background-color: var(--white);
+   }
+h2 {
+   font-family: var(--title);
+}
+
+/* --------------------------- START HEADER ---------------------------------*/
+/* --------------------------- MAIN NAVBAR ---------------------------------*/
+.navbar-custom {
+   background-color: var(--darkbrown); /* my color */
+}
+.navbar-custom .nav-item .nav-link {
+   font-family: var(--body) !important;
+   font-weight: 500;
+   font-size: 13px;
+   text-decoration: none;
+   padding-right: 8px;
+   letter-spacing: 2px;
+   transition: all 0.3s ease-in-out; /* Add a transition effect for all states*/
+}
+.navbar-custom .nav-item:nth-child(1) .nav-link {
+   color: var(--oldpink) !important;
+   font-weight: 800;
+}
+.navbar-custom .nav-item:nth-child(2) .nav-link {
+   color: var(--beige) !important;
+}
+.navbar-custom .nav-item:nth-child(3) .nav-link {
+   color: var(--beige) !important;
+}
+.navbar-custom .nav-item:nth-child(4) .nav-link {
+   color: var(--beige) !important;
+}
+.navbar-custom .nav-item:nth-child(5) .nav-link {
+   color: var(--beige) !important;
+}
+.navbar-custom .nav-item:nth-child(6) .nav-link {
+   color: var(--oldpink) !important;
+   font-weight: 800;
+}
+/* hover effect */
+/* Styles de base pour les liens de la navbar */
+.navbar-nav .nav-link {
+   position: relative;
+   padding-bottom: 5px;
+   color: var(--default-nav-color); /* Couleur par défaut, à ajuster */
+   transition: color 0.3s ease;
+}
+/* Effet de soulignement au hover */
+.navbar-nav .nav-link::after {
+   content: '';
+   position: absolute;
+   width: 0;
+   height: 2px;
+   bottom: 0;
+   left: 50%;
+   background-color: var(--orange); /* Utilisez la couleur de soulignement souhaitée */
+   transition: all 0.3s ease;
+}
+/* Animation du soulignement au hover */
+.navbar-nav .nav-link:hover::after {
+   width: 100%;
+   left: 0;
+}
+/* Changement de couleur du texte au hover */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: var(--orange); /* Assurez-vous que cette variable est définie */
+}
+/* Assurez-vous que ces styles ne sont pas écrasés par d'autres règles */
+.navbar-nav .nav-item .nav-link:hover,
+.navbar-nav .nav-item .nav-link:focus,
+.navbar-nav .nav-item .nav-link:active {
+   color: var(--orange) !important;
+}
+/* --------------------------- BURGER MENU for mobil -----------------------------------*/
+/* little animation on clic*/
+.navbar-toggler {
+   transition: all 0.3s ease-in-out;
+   border: none;
+   background-color: transparent;
+   outline: none;
+}
+.navbar-toggler:focus {
+   box-shadow: none;
+}
+.navbar-toggler:not(.collapsed) {
+   transform: rotate(90deg);
+}
+/* transition effect */
+.navbar-collapse {
+   transition: all 0.3s ease-in-out;
+   background-color: var(--darkbrown);
+   margin-top: -15px;
+}
+/* custom burger icon */
+.navbar-toggler-icon {
+   background-image: url("/assets/svg/burger.svg");
+}
+/* --------------------------- LOGIN ADMIN -----------------------------------*/
+#login-admin {
+   background-color: var(--orange);
+   /* background-image: url("/assets/svg/deco-bg-s5.svg"); */
+   background-size: contain;
+   max-width: 100%;
+   background-repeat: no-repeat;
+   background-position: 50%;
+}
+#login-admin .title{
+   font-family: var(--title);
+   font-size: 35px;
+   font-weight: 400;
+   letter-spacing: 1px;
+   color: var(--darkbrown);
+}
+/* --------------------------- BANNER ---------------------------------*/
+#banner {
+   background-color: var(--beige);
+   width: 100%;
+   height: 380px; /* ----------------------------------- TODO: à modifier en %-------------------------*/
+   margin-top: -3%;
+}
+#banner .slogan {
+   position: sticky;
+   color: var(--darkbrown);
+   vertical-align: middle;
+   margin-top: 145px;
+}
+/* ----------------------- BANNER TEXTE ANIMATION -----------------------*/
+.typed-container {
+   position: relative;
+   width: 35%; /* Un tiers de la largeur de l'écran */
+   height: 135px; /* Augmenté pour accommoder deux lignes */
+   overflow: hidden;
+   margin: 200px auto 0; /* Centrer horizontalement et ajouter une marge en haut */
+   display: flex;
+   align-items: center; /* Centrer verticalement le contenu */
+}
+#typed-output {
+   font-family: var(--words);
+   color: var(--darkbrown);
+   white-space: normal; /* Permettre le retour à la ligne */
+   overflow: hidden; /* Cacher le débordement */
+   border-right: 2px solid var(--darkbrown); /* Simuler un curseur */
+   margin: 0;
+   padding: 0;
+   padding-top: 25px;
+   text-align: left; /* Garder l'alignement à gauche pour l'effet de frappe */
+   max-width: 120%; /* S'assurer que le texte ne dépasse pas le conteneur */
+   line-height: 1.2; /* Ajuster l'espacement entre les lignes */
+   height: 3em; /* Hauteur pour deux lignes */
+   display: flex;
+   flex-direction: column;
+   justify-content: center; /* Centrer verticalement le texte */
+   text-transform: uppercase;
+   font-weight: 800;
+   font-size: 30px;
+}
+/* Animation du curseur */
+@keyframes blink-caret {
+   from, to { border-color: transparent }
+   50% { border-color: var(--darkbrown); }
+}
+#typed-output.typing {
+   animation: blink-caret .75s step-end infinite;
+}
+/* --------------------------- BIG IMAGE ---------------------------------*/
+#banner .big-worm {
+   position: sticky;
+   text-align: center;
+   display: flex;
+   width: 115%;
+   height: auto;
+   margin-right: 0px;
+   margin-left: -25px;
+   margin-top: -380px;
+}
+/* Media query pour les tablettes */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+   #banner .big-worm {
+      width: 170%; /* Ajuster la largeur pour les tablettes */
+      margin-left: -125px; /* Réinitialiser la marge gauche */
+      margin-top: -400px; /* Ajuster la position verticale si nécessaire */
+   }
+}
+/* Media query pour les mobiles */
+@media only screen and (max-width: 767px) {
+   #banner .big-worm {
+      display: none; /* Cacher le ver sur les mobiles */
+   }
+}
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+   #banner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 120px; /* Réduire la hauteur de la bannière en version mobile */
+   }
+   .typed-container {
+      width: 90%;
+      height: auto;
+      margin: 0 auto 20px; /* Supprime les marges verticales */
+   }
+   #typed-output {
+      font-size: 24px; /* Agrandir la taille de la police pour la version mobile */
+      padding-top: 40px;
+      text-align: center;
+      height: auto;
+      max-width: 100%;
+   }
+   #banner .slogan {
+      margin-top: 0;
+   }
+   /* Cacher le bouton "Faire un don" sur mobile */
+   #banner .text-end {
+      display: none;
+   }
+   /* Cacher spécifiquement l'image du ver de terre sur mobile */
+   #banner .big-worm {
+      display: none;
+   }
+}
+/* Media query pour les très petits écrans (smartphones) */
+@media (max-width: 480px) {
+   #banner {
+      height: 100px; /* Réduire encore la hauteur pour les très petits écrans */
+   }
+   #typed-output {
+      font-size: 20px; /* Agrandir la taille de la police pour les très petits écrans */
+   }
+}
+/* --------------------------- START MAIN ---------------------------------*/
+/* ---------- ALL PAGES -------------------------------*/
+.container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   max-width: 100%;
+   height: auto;
+}
+/* ------------------------ TITLES SECTIONS -------------------------------*/
+.title-section {
+   font-family: var(--title);
+   font-size: 40px;
+   font-weight: 400;
+   letter-spacing: 1px;
+   color: var(--beige);
+   margin: 0;
+}
+/* ------------------------ SUB-TITLES SECTIONS -------------------------------*/
+.subtitle-section {
+   font-family: var(--body);
+   font-size: 20px;
+   font-weight: 600;
+   letter-spacing: 1px;   
+   color: var(--oldpink);
+   margin: 0;
+   padding-top: 5px;
+   padding-bottom: 15px;
+}
+#parteners .subtitle-section {
+   color: var(--brownlight) !important;
+}
+#lombriboutic .subtitle-section {
+   color: var(--brownlight) !important;
+
+}
+/* ------------------------ TITRE ARTICLES -------------------------------*/
+.title-article {
+   font-family: var(--body);
+   font-size: 14px;
+   font-weight: 800;
+   letter-spacing: 2px;   
+   color: var(--orange);
+   padding-top: 8%;
+   word-spacing: 2px;
+}
+/* ------------------------ BEIGE PARAGRAPH -------------------------------*/
+.p-beige {
+   font-family: var(--body);
+   font-size: 13px;
+   font-weight: 400;
+   letter-spacing: 2px;   
+   color: var(--beige);
+   /* padding-top: 8%; */
+   line-height: 25px;
+}
+/* --------------------- SECTION  > SEPARATORS "waves" -------------------------------------- */ 
+.separator1 {
+   margin-top: -15%;
+   width: 100%;
+   height: auto;
+   margin-left: 0;
+   margin-right: 0;
+   margin-bottom: 0;
+   padding: 0;
+}
+.separator2 {
+   margin-top: -10%;
+   width: 100%;
+   height: auto;
+   margin-left: 0;
+   margin-right: 0;
+   margin-bottom: 0;
+   padding: 0;
+}
+.separator5 {
+   margin-top: -19%;
+   width: 100%;
+   height: auto;
+   margin-left: 0;
+   margin-right: 0;
+   margin-bottom: 0;
+   padding: 0;
+}
+.separator6 {
+   margin-top: -8%;
+   width: 100%;
+   height: auto;
+   margin-left: 0;
+   margin-right: 0;
+   margin-bottom: 0;
+   padding: 0;
+}
+.separator2-2 {
+   width: 100%;
+   height: auto;
+   margin-left: 0;
+   margin-right: 0;
+   margin-bottom: 0;
+   padding: 0;
+}
+.separator-footer {
+   margin-top: -10%;
+   width: 100%;
+   height: auto;
+   margin-left: 0;
+   margin-right: 0;
+   margin-bottom: 0;
+   padding: 0;
+}
+/* --------------------- btn ----------------------------*/
+/* Styles de base pour tous les boutons */
+.btn-custom {
+   width: 280px;
+   font-weight: bold;
+   text-transform: uppercase;
+   transition: all 0.3s ease;
+}
+/* Styles spécifiques pour chaque type de bouton */
+.btn-lb {
+   background-color: var(--brownlight);
+   border: 1px solid var(--orange);
+   color: var(--orange);
+}
+.btn-orange {
+   background-color: var(--orange);
+   border: 1px solid var(--darkbrown);
+   color: var(--darkbrown);
+}
+.btn-brown {
+   background-color: var(--darkbrown);
+   border: 1px solid var(--orange);
+   color: var(--orange);
+}
+.btn-don {
+   background-color: var(--orange);
+   border: 1px solid var(--beige);
+   color: var(--beige);
+   margin-right: 80px;
+   margin-top: -150px;
+}
+/* Effets de survol pour les boutons */
+.btn-ligthb:hover,
+.btn-orange:hover,
+.btn-brown:hover,
+.btn-custom:hover {
+   background-color: var(--orange);
+   border-color: var(--beige);
+   color: var(--beige);
+}
+.btn-don:hover {
+   background-color: var(--brownlight);
+   border-color: var(--beige);
+   color: var(--beige);
+}
+/* Style pour le bouton "En savoir plus" */
+.btn-suite {
+   font-family: var(--body);
+   font-size: 13px;
+   font-weight: 400;
+   letter-spacing: 2px;   
+   color: var(--beige);
+
+   line-height: 25px;
+}
+/* Ajout de !important pour forcer l'application des styles si nécessaire */
+.btn-primary:hover,
+.btn-primary:active {
+   background-color: var(--orange) !important;
+   border-color: var(--beige) !important;
+   color: var(--beige) !important;
+}
+/* --------------------- SECTION 1 > WHO -------------------------------------- */ 
+#who {
+   background-color: var(--darkbrown);
+   background-image: url("/assets/svg/deco-bg-s1.svg");
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: bottom 50px left 5px;
+   max-width: 100%;
+   height: 100%;
+}
+#who .s1 {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   max-width: 100%;
+   width: 75%;
+   height: auto;
+   padding-bottom: 10%;
+   padding-left: 5%;
+}
+#who .conseil {
+   font-family: var(--body);
+   font-size: 20px;
+   font-weight: 400;
+   letter-spacing: 2px;   
+   color: var(--beige);
+   padding-top: 10%;
+}
+/* -------------------- SECTION 2 > ACTUALITIES ----------------------------------- */
+#actualities {
+   margin-top: -2%;
+   background-color: var(--brownlight);
+   background-image: url("/assets/svg/deco-bg-s2.svg");
+   background-size: contain;
+   max-width: 100%;
+   background-repeat: no-repeat;
+   background-position: 50%;
+}
+
+/* --------------------- SECTION 3 > NUMBERS -------------------------------------- */ 
+#numbers .title-s3 {
+   margin-top: -40px;
+   padding-bottom: 40px;
+}
+#numbers { 
+   background-color: var(--darkbrown);
+   background-image: url("/assets/svg/bg-numbers.svg");
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+   max-width: 100%;
+   height: 100%;
+   padding-bottom: 40px;
+}
+#numbers .num-bg {
+   color: var(--beige);
+   font-size: 30px;
+   margin-bottom: 10px;
+   height: 40px; /* Hauteur fixe pour aligner les chiffres */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+#numbers .num-title {
+   color: var(--orange);
+   margin: 0;
+   padding: 0;
+   font-size: 14px;
+   font-weight: 800;
+   letter-spacing: 2px;
+   height: 40px; /* Hauteur fixe pour aligner les titres */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+}
+#numbers .num {
+   margin-top: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   height: 100%;
+}
+#numbers .nums {
+   margin-top: 80px;
+}
+/* Pictogrammes */
+#numbers .picto-num1,
+#numbers .picto-num2,
+#numbers .picto-num3 {
+   width: auto;
+   height: 80px;
+   margin-bottom: 20px;
+}
+/* Ajustement spécifique pour la balance */
+#numbers .picto-num3 {
+   height: 90px;
+   margin-bottom: 10px;
+}
+/* Media query pour les appareils mobiles */
+@media screen and (max-width: 767px) {
+   #numbers {
+      padding-bottom: 10px;
+   }
+   #numbers .row {
+      flex-direction: column;
+      align-items: center;
+   }
+   #numbers .col {
+      width: 100%;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+   #numbers .picto-num1,
+   #numbers .picto-num2,
+   #numbers .picto-num3 {
+      height: 60px;
+      margin-bottom: 10px;
+   }
+   #numbers .num-bg {
+      font-size: 24px;
+      margin-bottom: 5px;
+      height: 30px; /* Ajusté pour mobile */
+   }
+   #numbers .num-title {
+      font-size: 12px;
+      height: auto;
+      min-height: 40px; /* Hauteur minimale pour assurer l'alignement */
+      padding: 5px 0;
+   }
+   #numbers .nums {
+      margin-top: 0;
+   }
+}
+/* Media query pour les écrans moyens et grands */
+@media screen and (min-width: 768px) {
+   #numbers .col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+   #numbers .num {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100%;
+   }
+}
+/* --------------------- SECTION 4 > TRAININGS -------------------------------------------*/ 
+#trainings {
+   margin-top: -2%;
+   background-color: var(--brownlight);
+}
+#trainings h6 {
+   font-size: 11px;
+}
+#trainings .picto-training1 {
+   width: 10%;
+   height: auto;
+   align-items: center;
+}
+#trainings .picto-training2 {
+   width: 10%;
+   height: auto;
+   align-items: center;
+}
+#trainings .picto-training3 {
+   width: 10%;
+   height: auto;
+   align-items: center;
+}
+/* --------------------- CARDS ARTICLES ----------- SECTION 2 & 4 */
+#actualities .card,
+#trainings .card {
+   border: none;
+   box-shadow: var(--darkbrown) solid 1px;
+   width: 310px;
+   height: auto;
+   margin-top: 3%;
+   margin-bottom: 10%;
+}
+#actualities .card-actu {
+   border: none;
+   box-shadow: var(--darkbrown) solid 1px;
+   width: 1000px;
+   height: auto;
+   margin-top: 5%;
+   margin-bottom: 20%;
+}
+#actualities .card-body,
+#trainings .card-body,
+#actualities .card-body-actu {
+   background-color: var(--darkbrown);
+}
+#actualities .card-title,
+#trainings .card-title,
+#actualities .card-title-actu {
+   font-family: var(--body);
+   font-size: 18px;
+   font-weight: 800;
+   letter-spacing: 2px;   
+   color: var(--orange);
+   margin: 0%;
+}
+#actualities .card-text,
+#trainings .card-text,
+#actualities .card-text-actu {
+   font-family: var(--body);
+   font-size: 13px;
+   font-weight: 400;
+   letter-spacing: 2px;   
+   color: var(--beige);
+   padding-top: 8%;
+   line-height: 25px;
+}
+#actualities .category-title,
+#trainings .category-title {
+   font-family: var(--body);
+   font-size: 18px;
+   font-weight: 800;
+   letter-spacing: 5px;   
+   color: var(--oldpink);
+   margin: 0%;
+   border-bottom: var(--orange) solid 1px;
+}
+#actualities .img-actu {
+   width: 100%;
+   height: auto;
+   background-color: var(--brownlight);
+}
+/* --------------------- SECTION 5 > E-SHOP ------------------------------*/
+#lombriboutic {
+   background-color: var(--orange);
+   background-image: url("/assets/svg/deco-bg-s5.svg");
+   background-size: contain;
+   max-width: 100%;
+   background-repeat: no-repeat;
+   background-position: 50%;
+}
+#lombriboutic .card {
+   margin: 0;
+   width: 204px;
+   height: 204px;
+   background-color: var(--darkbrown);
+}
+#lombriboutic .card-body {
+   margin: 0;
+   background-color: var(--darkbrown);
+}
+#lombriboutic .subtitle-section-shop {
+   color: var(--darkbrown);
+   font-size: 24px;
+}
+#lombriboutic .subtitle-section-shop span {
+   color: var(--beige);
+   font-size: 20px;
+}
+#lombriboutic .card-title {
+   font-family: var(--body);
+   font-size: 14px;
+   font-weight: 800;
+   letter-spacing: 2px;   
+   color: var(--beige);
+   margin-top: 15px;
+}
+#lombriboutic .picto-shop1 {
+   width: 70%;
+   background-color: var(--darkbrown);
+}
+#lombriboutic .picto-shop2 {
+   width: 100%;
+   background-color: var(--darkbrown);
+}
+#lombriboutic .picto-shop3 {
+   width: 95%;
+   padding-top: 25px;
+   background-color: var(--darkbrown);
+}
+#lombriboutic .picto-shop4 {
+   width: 70%;
+   padding-top: 10px;
+   background-color: var(--darkbrown);
+}
+/* modal pop'up */
+.modal-content {
+   background-color: var(--beige);
+   border-radius: 15px;
+   text-align: center;
+   position: relative;
+}
+.modal-header {
+   border-bottom: none;
+   padding: 2rem 1rem 0.5rem;
+   justify-content: center;
+}
+.modal-footer {
+   border-top: none;
+   padding: 0.5rem 1rem 2rem;
+   justify-content: center;
+}
+.modal-title {
+   color: var(--darkbrown);
+   font-size: 45px;
+   font-family: var(--title);
+   margin: 0;
+   width: 100%;
+}
+.modal-body p {
+   color: var(--darkbrown);
+   font-size: 16px;
+   font-family: var(--body);
+}
+.modal-body {
+   padding: 1rem;
+}
+/* Centrer le bouton de fermeture */
+.modal-header .btn-close {
+   position: absolute;
+   right: 1rem;
+   top: 1rem;
+}
+/* Style spécifique pour le bouton dans la modal */
+.modal-footer .btn-modal-custom {
+   margin: 0;
+   background-color: var(--orange);
+   border: none;
+   color: white;
+   font-weight: bold;
+   padding: 10px 30px;
+   transition: all 0.3s ease;
+}
+.modal-footer .btn-modal-custom:hover {
+   background-color: var(--darkbrown);
+   color: var(--beige);
+}
+/* Contenu de la modal est centré verticalement */
+.modal-dialog-centered {
+   display: flex;
+   align-items: center;
+   min-height: calc(100% - 1rem);
+}
+/* Ajustements pour les écrans plus larges */
+@media (min-width: 576px) {
+   .modal-content {
+      width: 80%;
+   }
+   .modal-title {
+      font-size: 45px;
+   }
+   .modal-body {
+      font-size: 16px;
+   }
+   .modal-footer .btn-modal-custom {
+      padding: 10px 30px;
+      font-size: 16px;
+   }
+   .modal-dialog-centered {
+      min-height: calc(100% - 3.5rem);
+   }
+}
+/* Ajustements supplémentaires pour les grands écrans */
+@media (min-width: 992px) {
+   .modal-content {
+      width: 60%;
+   }
+}
+/* --------------------- SECTION 6 > PARTENERS                            */  
+#parteners {
+   background-color: var(--white);
+   padding-bottom: 5%;
+}
+#parteners .title-section {
+margin-top: 0px;
+}
+/* Style par défaut pour les logos partenaires */
+#logoparteners img {
+   max-width: 100%;
+   height: auto;
+}
+/* Media query pour les appareils mobiles */
+@media screen and (max-width: 767px) {
+   #logoparteners img {
+      max-width: 60%; /* Réduit la taille à 70% sur mobile */
+      height: auto;
+   }
+   #logoparteners .col {
+      padding: 10px; /* Réduit l'espacement entre les logos */
+   }
+}
+/* Media query pour les très petits écrans */
+@media screen and (max-width: 480px) {
+   #logoparteners img {
+      max-width: 40%; /* Réduit encore plus la taille pour les très petits écrans */
+   }   
+   #logoparteners .col {
+      padding: 5px; /* Réduit davantage l'espacement pour les très petits écrans */
+   }
+}
+/* --------------------- SECTION 7 > NEWSLETTER                            */  
+#newsletter {
+   margin-bottom: 25%;
+   background-color: var(--brownlight);
+   padding-bottom: 10%;
+   background-image: url("/assets/svg/deco-bg-s7.svg");
+   background-size:contain;
+   background-repeat: no-repeat;
+   background-position: top 100% left 50%;
+   max-width: 100%;
+   height: 50%;
+}
+/* --------------------- ARROW BACK TO TOP */
+
+/* --------------------------- END MAIN -----------------------------------*/
+/* --------------------------- START FOOTER ---------------------------------*/
+.footer {
+   background-color: var(--darkbrown);
+   padding-bottom: 3%;
+}
+.separator-footer {
+   width: 100%;
+}
+.footer a {
+   text-decoration: none;
+   color: var(--beige);
+   font-family: var(--body);
+}
+/* --------------------------- END FOOTER ---------------------------------*/
+/* --------------------------- START MEDIA QUERIES RESPONSIVE ---------------------------------*/
+/*Format tablette*****************************************************************************************************************************************************/
+
+/*Format mobile*****************************************************************************************************************************************************/
+@media (max-width: 768px) {
+/* Supprime l'image de fond pour les écrans de 768px ou moins */
+/*  BURGER MENU  */
+ /* Ajustez cette valeur selon votre breakpoint */
+   .navbar-nav {
+      text-align: end;
+      margin: 0px;
+      margin-right: 15px;
+   }
+   .navbar-nav .nav-item {
+      padding: 0px;
+      }
+   .navbar-nav .nav-link:active {
+      color: var(--orange);
+   }
+
+   /* ----------------------- TODO: CARD --------------------------------------------- */
+   /* ------------------------ TODO:  BTN --------------------------------------------- */
+   /* ------------------------- TODO:  SEPARATORS SECTIONS ---------------------------- */
+   .separator1 {
+      margin-top: -15%;
+   }
+   .separator2 {
+      margin-top: -35%;
+   }
+   .separator5 {
+      margin-top: -38%;
+   }
+   .separator-footer {
+      margin-top: -15%;
+   }
+   /* ----------------------- SECTIONS ----------------------------------------- */
+   #who {
+      background-image: none;
+   }
+   #actualities {
+      background-image: none;
+   }
+   #numbers {
+      background-image: none;
+   }
+   #trainings {
+      background-image: none;
+   }
+   #lombriboutic {
+      background-image: none;
+   }
+   #lombriboutic .card {
+      padding-left: 50px;
+      padding-right: 50px;
+   }
+   #newsletter {
+      background-image: none;
+   }
+/* ----------------------- FOOTER ----------------------------------------- */
+}
+
+
